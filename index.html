@@ -29,13 +29,12 @@ zoom: 2,
 
   }
 
-  $('#start_year').live('change', function(event) {
-    layer.setQuery("select StartPoint from 415749 where Date > " + this.value);
-    alert("select StartPoint from 415749 where Date > " + this.value);
+  $('#start_year, #end_year').live('change', function(event) {
+      layer.setQuery("select StartPoint from 415749 where Date > " + $('#start_year').attr('value') + " and Date < " + $('#end_year').attr('value'));
   });
 
-  $('#end_year').live('change', function(event) {
-    layer.setQuery("select StartPoint from 415749 where DiseaseCount < " + this.value);
+  $('#disease').live('change', function(event) {
+      layer.setQuery("select StartPoint from 415749 where Disease = '" + this.value + "'");
   });
 
 </script>
@@ -43,10 +42,42 @@ zoom: 2,
 <body onload="initialize()">
   <div id="map_canvas" style="width:100%; height:80%"></div>
   <div>
-    Filter by date =>
+    Date
     <form>
-      Start year: <input type="text" id="start_year" /><br />
-      End year: <input type="text" id="end_year" /><br />
+      Start year: <input type="text" id="start_year" value="1950"/><br />
+      End year: <input type="text" id="end_year" value="2010"/><br />
+    </form>
+  </div>
+  <div>
+    Disease
+    <form>
+      <select id="disease">
+        <option value="" selected="selected">&nbsp;</option>
+        <option value="BBD">
+        BBD
+        </option>
+        <option value="YBD">
+        YBD
+        </option>
+        <option value="NT">
+        NT
+        </option>
+        <option value="QLD">
+        QLD
+        </option>
+        <option value="SA">
+        SA
+        </option>
+        <option value="TAS">
+        TAS
+        </option>
+        <option value="VIC">
+        VIC
+        </option>
+        <option value="WA">
+        WA
+        </option>
+      </select>
     </form>
   </div>
 </body>
